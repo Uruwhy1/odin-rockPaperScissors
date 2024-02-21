@@ -20,8 +20,10 @@ function getComputerChoice() {
 function getPlayerSelection() {
     let choice = prompt("Choose a move!", "Rock");
 
-
-    if (choice == null || choice.toLowerCase() != "rock" && choice.toLowerCase() != "paper" && choice.toLowerCase() != "scissors") {
+    if (choice == null || 
+        choice.toLowerCase() != "rock" && 
+        choice.toLowerCase() != "paper" && 
+        choice.toLowerCase() != "scissors") {
         alert("You Made a Mistake!");
         choice = getPlayerSelection();
     }
