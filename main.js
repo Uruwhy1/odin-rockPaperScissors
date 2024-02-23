@@ -15,81 +15,91 @@ function getComputerChoice() {
     return choice;
 }
 
-/// PLAYERS NEEDS TO GET PROMPTED A SELECTION
 
-function getPlayerSelection() {
-    let choice = prompt("Choose a move!", "Rock");
+const buttons = document.querySelectorAll('button');
 
-    if (choice == null || 
-        choice.toLowerCase() != "rock" && 
-        choice.toLowerCase() != "paper" && 
-        choice.toLowerCase() != "scissors") {
-        alert("You Made a Mistake!");
-        choice = getPlayerSelection();
-    }
-    return choice.toLowerCase();
-}
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const playerChoice = button.id;
+      playGame(playerChoice);
+    });
+  });
 
-/// MOVES NEED TO BE COMPARED
 
-function playRound() {
-    let playerChoice = getPlayerSelection();
+  /// MOVES NEED TO BE COMPARED
+
+  function playRound(playerChoice) {
     let computerChoice = getComputerChoice();
+    let result;
 
     if (playerChoice == computerChoice) {
-        return `This is a tie!`;
+        result = `This is a tie!`;
 
     } else if (playerChoice == "rock" && computerChoice == "paper") {
-        return `You lost! Paper beats Rock!`;
+        result = `You lost! Paper beats Rock!`;
     } else if (playerChoice == "rock" && computerChoice == "scissors") {
-        return `You won! Rock beats Scissors!`;
+        result = `You won! Rock beats Scissors!`;
 
     } else if (playerChoice == "paper" && computerChoice == "rock") {
-        return `You won! Paper beats rock!`;
+        result = `You won! Paper beats rock!`;
     } else if (playerChoice == "paper" && computerChoice == "scissors") {
-        return `You lost! Scissors beats Paper!`;
+        result = `You lost! Scissors beats Paper!`;
 
     } else if (playerChoice == "scissors" && computerChoice == "rock") {
-        return `You lost! Rock beats Scissors!`;
+        result = `You lost! Rock beats Scissors!`;
     } else if (playerChoice == "scissors" && computerChoice == "paper") {
-        return `You won! Scissors beats Paper!`;
+        result = `You won! Scissors beats Paper!`;
     }
+
+    let roundResult = document.createElement('p');
+    roundResult.textContent = result;
+    document.getElementById('results').appendChild(roundResult);
+
+    return result;
 }
+
+
 
 /// BEST OF FIVE NEEDS TO BE PLAYED
 
-function playGame() {
-    let humanWins = 0;
-    let computerWins = 0;
-    let ties = 0;
 
-    for (let i = 0; i < 5; i++) {
+let humanWins = 0;
+let computerWins = 0;
+let ties = 0;
 
-        let result = playRound();
-        console.log(result);
-        alert(result)
+function playGame(playerChoice) {
 
-        // CHECK WHO WON
-        if (result.includes("won")) {
-            humanWins++;
-        } else if (result.includes("lost")) {
-            computerWins++;
-        } else {
-            ties++
-        }
+    let result = playRound(playerChoice);
+
+    // CHECK WHO WON
+    if (result.includes("won")) {
+        humanWins++;
+    } else if (result.includes("lost")) {
+        computerWins++;
+    } else {
+        ties++
     }
 
+    if(humanWins + computerWins + ties == 5) {
+        let finalResult;
         // CALCULATE OVERALL WINNER
         if (humanWins > computerWins) {
-            return "The human has won. The world is saved!";
+            finalResult = "The human has won. The world is saved!";
         } else if (computerWins > humanWins) {
-            return "The machine revolution has started. No one is safe.";
+            finalResult = "The machine revolution has started. No one is safe.";
         } else {
-            return "This is a tie.";
+            finalResult = "The game is tied!";
         }
-    }
 
-/// GET RESULT DISPLAYED   
-let gameResult = playGame();
-alert(gameResult);
-console.log(gameResult);
+        humanWins = 0;
+        computerWins = 0;
+        ties = 0;
+
+        let gameResult = document.createElement('p');
+        gameResult.style.backgroundColor = 'blue';
+        gameResult.style.color = 'white'
+        gameResult.textContent = finalResult;
+        document.getElementById('results').appendChild(gameResult);
+    }
+}
+
