@@ -1,0 +1,82 @@
+@import 'https://fonts.googleapis.com/css?family=Kode+Mono:400,500,600,700,900';
+
+* {
+    box-sizing: border-box;
+    font-size: 20px;
+    font-family: 'Kode Mono', 'Courier New'
+}
+
+body {
+    background-color: #6C5B7B;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game {
+    background-color: #C06C84;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 20px;
+}
+
+.score-container1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    margin: -5px;
+    padding: 0 5px;
+
+    background-color: #000;
+    color: #Fff
+}
+
+.score-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 15px;
+}
+
+.score {
+    border: 1px solid white;
+    height: 300px;
+    width: 300px;
+    background-color: #355C7D;
+    margin: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.human, .computer {
+    font-size: 150px;
+    color: yellow;
+    font-weight: 600;
+}
+
+.moves > button {
+    background-color: #F67280;
+    color: #fff;
+    margin-bottom: 10px;
+    border: 2px solid black;
+}
+
+#results {
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#results p {
+    padding: 0 5px;
+}

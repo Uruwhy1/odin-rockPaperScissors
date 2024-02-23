@@ -69,6 +69,13 @@ let ties = 0;
 
 function playGame(playerChoice) {
 
+    // CLEAR LOG IF NEW GAME
+
+    if (humanWins + computerWins + ties == 0) {
+        document.getElementById('results').innerHTML = '';
+    }
+
+
     let result = playRound(playerChoice);
 
     // CHECK WHO WON
@@ -79,6 +86,11 @@ function playGame(playerChoice) {
     } else {
         ties++
     }
+
+    document.querySelector('.human').textContent = humanWins;
+    document.querySelector('.computer').textContent = computerWins;
+
+
 
     if(humanWins + computerWins + ties == 5) {
         let finalResult;
@@ -94,12 +106,16 @@ function playGame(playerChoice) {
         humanWins = 0;
         computerWins = 0;
         ties = 0;
+    
+
+        // INPUT WINNER
 
         let gameResult = document.createElement('p');
         gameResult.style.backgroundColor = 'blue';
         gameResult.style.color = 'white'
         gameResult.textContent = finalResult;
         document.getElementById('results').appendChild(gameResult);
+
     }
 }
 
