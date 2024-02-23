@@ -53,6 +53,16 @@ buttons.forEach(button => {
 
     let roundResult = document.createElement('p');
     roundResult.textContent = result;
+
+    // Check who wins and apply different styles
+    if (result.includes('won')) {
+        roundResult.classList.add('won');
+    } else if (result.includes('lost')) {
+        roundResult.classList.add('lost');
+    } else {
+        roundResult.classList.add('tie');
+    }
+
     document.getElementById('results').appendChild(roundResult);
 
     return result;
@@ -92,7 +102,7 @@ function playGame(playerChoice) {
 
 
 
-    if(humanWins + computerWins + ties == 5) {
+    if(humanWins + computerWins + ties == 5 || humanWins == 3 || computerWins == 3 || ties == 2 && (computerWins == 2 || humanWins == 2)) {
         let finalResult;
         // CALCULATE OVERALL WINNER
         if (humanWins > computerWins) {
