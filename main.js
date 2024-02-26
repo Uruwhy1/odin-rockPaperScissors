@@ -5,11 +5,11 @@ function getComputerChoice() {
     let choice;
 
     if (random >= 0.66) {
-        choice = "rock"
+        choice = "Rock"
     } else if (random < 0.33) {
-        choice = "paper"
+        choice = "Paper"
     } else { 
-        choice = "scissors" 
+        choice = "Scissors" 
     }
 
     return choice;
@@ -28,27 +28,22 @@ buttons.forEach(button => {
 
   /// MOVES NEED TO BE COMPARED
 
+  const whatBeatsWhat = {
+    Rock: "Scissors",
+    Paper: "Rock",
+    Scissors: "Paper",
+  }
+
   function playRound(playerChoice) {
     let computerChoice = getComputerChoice();
     let result;
 
-    if (playerChoice == computerChoice) {
-        result = `This is a tie!`;
-
-    } else if (playerChoice == "rock" && computerChoice == "paper") {
-        result = `You lost! Paper beats Rock!`;
-    } else if (playerChoice == "rock" && computerChoice == "scissors") {
-        result = `You won! Rock beats Scissors!`;
-
-    } else if (playerChoice == "paper" && computerChoice == "rock") {
-        result = `You won! Paper beats rock!`;
-    } else if (playerChoice == "paper" && computerChoice == "scissors") {
-        result = `You lost! Scissors beats Paper!`;
-
-    } else if (playerChoice == "scissors" && computerChoice == "rock") {
-        result = `You lost! Rock beats Scissors!`;
-    } else if (playerChoice == "scissors" && computerChoice == "paper") {
-        result = `You won! Scissors beats Paper!`;
+    if (playerChoice === computerChoice) {
+        result = "This is a tie!";
+    } else if (whatBeatsWhat[playerChoice] === computerChoice) {
+        result = `You won! ${playerChoice} beats ${computerChoice}!`;
+    } else {
+        result = `You lost! ${computerChoice} beats ${playerChoice}!`;
     }
 
     let roundResult = document.createElement('p');
